@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="20dp">
+
+    <!-- Título -->
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cuenta Atrás"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="20dp"/>
+
+    <!-- Campos para ingresar minutos y segundos -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp">
+
+        <EditText
+            android:id="@+id/minutes_input"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:hint="Minutos"
+            android:inputType="number"
+            android:gravity="center"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
+            android:textSize="18sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
+
+        <EditText
+            android:id="@+id/seconds_input"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:hint="Segundos"
+            android:inputType="number"
+            android:gravity="center"
+            android:textSize="18sp"/>
+    </LinearLayout>
+
+    <!-- Temporizador -->
+    <TextView
+        android:id="@+id/tv_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00:00"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="30dp"/>
+
+    <!-- Botón Iniciar/Detener -->
+    <Button
+        android:id="@+id/btn_start_stop_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Iniciar"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#000000"
+        android:padding="10dp"
+        android:layout_marginBottom="10dp"/>
+
+    <!-- Botón Reiniciar -->
+    <Button
+        android:id="@+id/btn_reset_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reiniciar"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#FF5722"
+        android:padding="10dp"
+        android:layout_marginBottom="10dp"/>
+
+    <Button
+        android:id="@+id/btn_switch_mode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cambiar a Cronómetro"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#2196F3"
+        android:padding="10dp"
+        android:layout_marginBottom="10dp"/>
+
+    <!-- Botón Volver al Menú -->
+
+</LinearLayout>
