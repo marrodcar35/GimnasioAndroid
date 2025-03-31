@@ -112,9 +112,16 @@ public class TimerActivity extends AppCompatActivity {
     }
 
     private void resetTimer() {
-        stopTimer();
-        timeLeftInMillis = (timeMilis > 0) ? timeMilis : 0;
-        updateTimerText();
+        if (isCountdownMode) {
+            stopTimer();
+            timeLeftInMillis = timeMilis;
+            updateTimerText();
+        } else {
+            stopChronometer();
+            elapsedTime = 0;  // Reiniciar el tiempo acumulado
+            startTime = 0;     // Reiniciar el tiempo de inicio
+            tvTimer.setText("00:00.00");
+        }
     }
 
 
