@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
@@ -11,10 +12,19 @@
         <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
+            android:title="@string/menu_gallery"
+            android:visible="true" />
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/menu_slideshow" />
+        <item
+            android:id="@+id/btn_open_timer"
+            android:icon="@android:drawable/ic_lock_idle_alarm"
+            android:title="@string/menu_timer" />
+        <item
+            android:id="@+id/nav_calendario"
+            android:icon="@android:drawable/ic_menu_my_calendar"
+            android:title="@string/menu_calendario" />
     </group>
 </menu>
