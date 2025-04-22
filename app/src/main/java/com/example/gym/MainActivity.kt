@@ -40,17 +40,17 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow
+                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow, R.id.btn_open_timer, R.id.nav_calendario
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        val btnOpenTimer: Button = findViewById(R.id.btn_open_timer)
+        /*val btnOpenTimer: Button = findViewById(R.id.btn_open_timer)
         btnOpenTimer.setOnClickListener {
             val intent = Intent(this, TimerActivity::class.java)
             startActivity(intent)
-        }
+        }*/
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
