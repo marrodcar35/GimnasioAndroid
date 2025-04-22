@@ -22,4 +22,16 @@
         android:name="com.example.gym.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
+
+    <fragment
+        android:id="@+id/btn_open_timer"
+        android:name="com.example.gym.ui.timer.TimerActivity"
+        android:label="@string/menu_timer"
+        tools:layout="@layout/activity_timer" />
+
+    <fragment
+        android:id="@+id/nav_calendario"
+        android:name="com.example.gym.ui.calendario.CalendarioFragment"
+        android:label="@string/menu_calendario"
+        tools:layout="@layout/fragment_calendario" />
 </navigation>
