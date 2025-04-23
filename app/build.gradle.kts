@@ -31,6 +31,11 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+        /*coreLibraryDesugaringEnabled = true
+        // Set Java compatibility (version can be higher if desired)
+        sourceCompatibility = JavaVersion.VERSION_1_8
+                targetCompatibility = JavaVersion.VERSION_1_8*/
+
     }
     kotlinOptions {
         jvmTarget = "11"
@@ -57,5 +62,12 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     //implementation("com.kizitonwose.calendar:view:2.6.2")
     //coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.3")
+    implementation("com.github.prolificinteractive:material-calendarview:2.0.1")
+    //implementation("com.github.prolificinteractive:material-calendarview:1.4.3")
+    /*implementation("com.kizitonwose.calendar:view:2.0.3")
+
+    // The compose calendar library for Android
+    implementation("com.kizitonwose.calendar:compose:2.0.3")*/
+
 
 }
