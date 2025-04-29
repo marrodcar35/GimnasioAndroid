@@ -2,6 +2,7 @@ package com.example.gym
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
@@ -14,6 +15,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.example.gym.databinding.ActivityMainBinding
 import android.widget.Button
+import com.google.firebase.FirebaseApp
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,6 +24,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        try {
+            FirebaseApp.initializeApp(this)
+            Log.d("FIREBASE_INIT", "Firebase inicializado correctamente")
+        } catch (e: Exception) {
+            Log.e("FIREBASE_INIT", "Error al inicializar Firebase: ${e.message}")
+        }
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
