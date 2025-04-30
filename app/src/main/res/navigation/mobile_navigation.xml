@@ -48,16 +48,17 @@
     <fragment
         android:id="@+id/nav_rutina"
         android:name="com.example.gym.ui.calendario.VerRutina"
-        android:label="Detalle de la Rutina"/>
+        android:label="Detalle de la Rutina">
+        <action
+        android:id="@+id/action_detalleRutinaFragment_to_ejercicioFragment"
+        app:destination="@id/nav_ejercicios" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_ejercicios"
         android:name="com.example.gym.ui.calendario.AgregaEjercicio"
         android:label="Agrega ejercicio"
-        tools:layout="@layout/fragment_ejercicio">
-        <action
-            android:id="@+id/action_ejercicioFragment_to_detalleRutinaFragment"
-            app:destination="@id/nav_rutina" />
-    </fragment>
+        tools:layout="@layout/fragment_ejercicio"/>
+
 
 </navigation>

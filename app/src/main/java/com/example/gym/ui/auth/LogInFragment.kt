@@ -61,6 +61,7 @@ class LogInFragment: Fragment() {
                 auth.signInWithEmailAndPassword(email, contra)
                     .addOnCompleteListener {
                         if (it.isSuccessful) {
+                            //Guardar los datos en el diccionario
                             val userId = FirebaseAuth.getInstance().currentUser!!.uid
                             val db = FirebaseFirestore.getInstance()
 
