@@ -13,7 +13,7 @@
 
     \\SANTIAGO
     <string name="email">Email</string>
-    <string name="userName">UserName</string>
+    <string name="userName">Nombre de usuario</string>
     <string name="password">Password</string>
   \\Joaquin
     <string name="menu_timer">Timer</string>
