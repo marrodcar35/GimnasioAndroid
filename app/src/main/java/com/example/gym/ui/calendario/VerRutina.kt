@@ -37,7 +37,7 @@ class VerRutina : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val fecha = arguments?.getString("fecha")
+        var fecha = arguments?.getString("fecha")
         titulo = view.findViewById(R.id.fechaRut)
         descripcion = view.findViewById(R.id.editDescripcionRut)
         lista = view.findViewById(R.id.listaRut)
@@ -45,7 +45,7 @@ class VerRutina : Fragment() {
         botonNewEjer = view.findViewById(R.id.nuevoejerbutton)
 
         val db = FirebaseFirestore.getInstance()
-        val rutinaRef = db.collection("rutinas").document(fecha ?: "sin_fecha")
+        val rutinaRef = db.collection("rutinas").document(fecha ?: rutinaViewModel.fecha)
 
         if (rutinaViewModel.fecha.isEmpty() && fecha != null) {
             titulo.text = "Rutina de $fecha"
@@ -92,8 +92,8 @@ class VerRutina : Fragment() {
         guardar.setOnClickListener {
             val nuevaRutina = Rutina(
                 descripcion = descripcion.text.toString(),
-                fecha = fecha ?: "",
-                ejercicios = rutinaViewModel.ejercicios
+                fecha = fecha ?: rutinaViewModel.fecha,
+                ejercicios = ejercicios
             )
 
             rutinaViewModel.descripcion = nuevaRutina.descripcion
