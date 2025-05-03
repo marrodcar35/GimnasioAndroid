@@ -44,6 +44,8 @@ class VerRutina : Fragment() {
         guardar = view.findViewById(R.id.guardaRut)
         botonNewEjer = view.findViewById(R.id.nuevoejerbutton)
 
+        descripcion.setText("")
+
         val db = FirebaseFirestore.getInstance()
         val rutinaRef = db.collection("rutinas").document(fecha ?: rutinaViewModel.fecha)
 

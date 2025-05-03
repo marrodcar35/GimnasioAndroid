@@ -40,6 +40,11 @@ class AgregaEjercicio : Fragment() {
         series = view.findViewById(R.id.editSeries)
         guardar = view.findViewById(R.id.agregarbutton)
 
+        nombre.setText("")
+        descripcion.setText("")
+        repeticiones.setText("")
+        series.setText("")
+
         guardar.setOnClickListener {
             if(series.text.toString().toIntOrNull() != null && repeticiones.text.toString().toIntOrNull() != null) {
                 val nuevoEjercicio = Ejercicio(

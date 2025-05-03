@@ -31,15 +31,19 @@ class CalendarioFragment : Fragment() {
         val fechaTexto = view.findViewById<TextView>(R.id.fechaTexto)
         val rutinabtn = view.findViewById<Button>(R.id.rutinabtn)
 
+        calendarView.post { calendarView.clearSelection() }
+        fechaTexto.text = "SELECCIONA UNA FECHA"
+
         calendarView.setOnDateChangedListener { _, date, _ ->
             val dia = date.day
             val mes = date.month
             val año = date.year
             fechaSeleccionada = "$dia-$mes-$año"
 
-            fechaTexto.text = "Hoy es $fechaSeleccionada"
+            //fechaTexto.text = "Hoy es $fechaSeleccionada"
 
             rutinabtn.visibility = View.VISIBLE
+            fechaTexto.visibility = View.GONE
 
             rutinabtn.text = "Ver rutina del $fechaSeleccionada"
         }
