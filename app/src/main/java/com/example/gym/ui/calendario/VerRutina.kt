@@ -44,12 +44,11 @@ class VerRutina : Fragment() {
         guardar = view.findViewById(R.id.guardaRut)
         botonNewEjer = view.findViewById(R.id.nuevoejerbutton)
 
-        titulo.text = "Rutina de $fecha"
-
         val db = FirebaseFirestore.getInstance()
         val rutinaRef = db.collection("rutinas").document(fecha ?: "sin_fecha")
 
         if (rutinaViewModel.fecha.isEmpty() && fecha != null) {
+            titulo.text = "Rutina de $fecha"
             rutinaViewModel.fecha = fecha
 
             // Leer la rutina desde Firestore
@@ -77,6 +76,8 @@ class VerRutina : Fragment() {
                     Log.e("Firestore", "Error al leer rutina: ${e.message}")
                 }
         } else {
+            titulo.text = "Rutina de ${rutinaViewModel.fecha}"
+
             descripcion.setText(rutinaViewModel.descripcion)
 
             ejercicios = rutinaViewModel.ejercicios
@@ -92,7 +93,7 @@ class VerRutina : Fragment() {
             val nuevaRutina = Rutina(
                 descripcion = descripcion.text.toString(),
                 fecha = fecha ?: "",
-                ejercicios = ejercicios // Puedes adaptarlo si ya tienes ejercicios
+                ejercicios = rutinaViewModel.ejercicios
             )
 
             rutinaViewModel.descripcion = nuevaRutina.descripcion
