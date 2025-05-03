@@ -7,11 +7,15 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.gym.R
+import com.example.gym.viewmodel.RutinaViewModel
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
 
 class CalendarioFragment : Fragment() {
+    private val rutinaViewModel: RutinaViewModel by activityViewModels()
+
     private var fechaSeleccionada: String? = null
 
     override fun onCreateView(
@@ -29,7 +33,7 @@ class CalendarioFragment : Fragment() {
 
         calendarView.setOnDateChangedListener { _, date, _ ->
             val dia = date.day
-            val mes = date.month + 1
+            val mes = date.month
             val año = date.year
             fechaSeleccionada = "$dia-$mes-$año"
 
@@ -44,6 +48,11 @@ class CalendarioFragment : Fragment() {
             // Aquí podrías lanzar otro fragment, activity, o mostrar más info
             // Ejemplo simple:
             //fechaTexto.text = "Rutina de $fechaStr:\n- Pecho\n- Bíceps\n- Cardio 20min"
+
+            rutinaViewModel.descripcion = ""
+            rutinaViewModel.fecha = ""
+            rutinaViewModel.ejercicios.clear()
+
             val bundle = Bundle()
             bundle.putString("fecha", fechaSeleccionada)
             findNavController().navigate(R.id.action_calendarioFragment_to_detalleRutinaFragment, bundle)

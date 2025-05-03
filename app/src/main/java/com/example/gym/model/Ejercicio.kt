@@ -4,5 +4,5 @@ data class Ejercicio (
     var nombre: String = "",
     var descripcion: String = "",
     var repeticiones: Int = 0,
-    var serie: Int = 0
+    var series: Int = 0
 )

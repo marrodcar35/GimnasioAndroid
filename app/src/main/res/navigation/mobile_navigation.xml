@@ -58,7 +58,13 @@
         android:id="@+id/nav_ejercicios"
         android:name="com.example.gym.ui.calendario.AgregaEjercicio"
         android:label="Agrega ejercicio"
-        tools:layout="@layout/fragment_ejercicio"/>
+        tools:layout="@layout/fragment_ejercicio">
+        <action
+            android:id="@+id/action_ejercicioFragment_to_detalleRutinaFragment"
+            app:destination="@id/nav_rutina"
+            app:popUpTo="@id/nav_rutina"
+            app:popUpToInclusive="true"/>
+    </fragment>
 
 
 </navigation>

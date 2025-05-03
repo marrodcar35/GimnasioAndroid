@@ -8,18 +8,25 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.gym.R
+import com.example.gym.model.Ejercicio
 import com.example.gym.model.Rutina
+import com.example.gym.viewmodel.RutinaViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 
 class VerRutina : Fragment() {
+    private val rutinaViewModel: RutinaViewModel by activityViewModels()
+
     private lateinit var titulo: TextView
     private lateinit var descripcion: EditText
     private lateinit var lista: TextView
     private lateinit var guardar: Button
     private lateinit var botonNewEjer: Button
+    private var ejercicios: List<Ejercicio> = emptyList()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,53 +44,83 @@ class VerRutina : Fragment() {
         guardar = view.findViewById(R.id.guardaRut)
         botonNewEjer = view.findViewById(R.id.nuevoejerbutton)
 
+        titulo.text = "Rutina de $fecha"
+
         val db = FirebaseFirestore.getInstance()
         val rutinaRef = db.collection("rutinas").document(fecha ?: "sin_fecha")
 
-        titulo.text = "Rutina de $fecha"
+        if (rutinaViewModel.fecha.isEmpty() && fecha != null) {
+            rutinaViewModel.fecha = fecha
 
-        // Leer la rutina desde Firestore
-        rutinaRef.get()
-            .addOnSuccessListener { document ->
-                if (document.exists()) {
-                    val rutina = document.toObject(Rutina::class.java)
-                    if (rutina != null) {
-                        Log.d("Firestore", "Rutina encontrada: $rutina")
-                        descripcion.setText(rutina.descripcion)
-                        lista.text = "Probando" // o mostrar ejercicios
+            // Leer la rutina desde Firestore
+            rutinaRef.get()
+                .addOnSuccessListener { document ->
+                    if (document.exists()) {
+                        val rutina = document.toObject(Rutina::class.java)
+                        if (rutina != null) {
+                            Log.d("Firestore", "Rutina encontrada: $rutina")
+
+                            descripcion.setText(rutina.descripcion)
+                            rutinaViewModel.descripcion=rutina.descripcion
+
+                            ejercicios = rutina.ejercicios
+                            lista.text = imprimeEjercicios(ejercicios)
+                            rutinaViewModel.ejercicios=ejercicios.toMutableList()
+                        } else {
+                            Log.d("Firestore", "Documento inválido para Rutina")
+                        }
                     } else {
-                        Log.d("Firestore", "Documento inválido para Rutina")
+                        Log.d("Firestore", "No hay rutina para esta fecha")
                     }
-                } else {
-                    Log.d("Firestore", "No hay rutina para esta fecha")
                 }
-            }
-            .addOnFailureListener { e ->
-                Log.e("Firestore", "Error al leer rutina: ${e.message}")
-            }
+                .addOnFailureListener { e ->
+                    Log.e("Firestore", "Error al leer rutina: ${e.message}")
+                }
+        } else {
+            descripcion.setText(rutinaViewModel.descripcion)
+
+            ejercicios = rutinaViewModel.ejercicios
+            lista.text = imprimeEjercicios(rutinaViewModel.ejercicios)
+        }
 
         botonNewEjer.setOnClickListener{
-            val bundle = Bundle()
-            bundle.putString("fecha", fecha)
-            findNavController().navigate(R.id.action_detalleRutinaFragment_to_ejercicioFragment,bundle)
+            findNavController().navigate(R.id.action_detalleRutinaFragment_to_ejercicioFragment)
         }
+
         // Guardar/Actualizar rutina al pulsar botón
         guardar.setOnClickListener {
             val nuevaRutina = Rutina(
                 descripcion = descripcion.text.toString(),
                 fecha = fecha ?: "",
-                ejercicios = listOf() // Puedes adaptarlo si ya tienes ejercicios
+                ejercicios = ejercicios // Puedes adaptarlo si ya tienes ejercicios
             )
+
+            rutinaViewModel.descripcion = nuevaRutina.descripcion
+            rutinaViewModel.fecha = nuevaRutina.fecha
+            rutinaViewModel.ejercicios = nuevaRutina.ejercicios.toMutableList()
 
             rutinaRef.set(nuevaRutina)
                 .addOnSuccessListener {
+                    Toast.makeText(context, "Rutina guardada", Toast.LENGTH_SHORT).show()
                     Log.d("Firestore", "Rutina guardada correctamente")
                 }
                 .addOnFailureListener { error ->
                     Log.e("Firestore", "Error al guardar rutina: ${error.message}")
                 }
         }
+    }
 
+    fun imprimeEjercicios(lista:List<Ejercicio>): String{
+        var aux = ""
+        for (e in lista) {
+            aux = aux +
+                    "Nombre: ${e.nombre}\n" +
+                    "Descripcion: ${e.descripcion}\n" +
+                    "Repeticiones: ${e.repeticiones}\n" +
+                    "Series: ${e.series}\n\n"
+        }
+
+        return aux // o mostrar ejercicios
     }
 
 }
