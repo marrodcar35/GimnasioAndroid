@@ -1,5 +1,5 @@
 // UserViewModel.kt
-package com.example.gym  // 👈 asegurate que el package coincide
+package com.example.gym.model
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

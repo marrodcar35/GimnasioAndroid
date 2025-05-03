@@ -7,17 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
-import com.example.gym.R
-import com.example.gym.UserViewModel
-import com.example.gym.databinding.FragmentLogInBinding
+import com.example.gym.model.UserViewModel
 import com.example.gym.databinding.FragmentProfileBinding
-import com.example.gym.ui.auth.LogInFragment
-import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
+import com.example.gym.MainActivity
+import com.example.gym.R
 
 class ProfileFragment: Fragment() {
     private lateinit var auth: FirebaseAuth
@@ -67,8 +64,15 @@ class ProfileFragment: Fragment() {
         }
 
         binding.button3.setOnClickListener {
+//            FirebaseAuth.getInstance().signOut()
+//            requireActivity().recreate() // Fuerza a reiniciar MainActivity, que evaluará sesión
             FirebaseAuth.getInstance().signOut()
-            requireActivity().recreate() // Fuerza a reiniciar MainActivity, que evaluará sesión
+
+            val intent = Intent(requireContext(), MainActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            }
+            startActivity(intent)
+
         }
     }
     private fun enableEditing(enabled: Boolean) {

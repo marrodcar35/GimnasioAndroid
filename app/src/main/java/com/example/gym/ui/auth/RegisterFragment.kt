@@ -14,13 +14,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.gym.MainActivity
 import com.example.gym.R
-import com.example.gym.UserViewModel
-import com.example.gym.databinding.FragmentLogInBinding
+import com.example.gym.model.UserViewModel
 import com.example.gym.databinding.FragmentRegisterBinding
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
-import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.FirebaseFirestore
 
