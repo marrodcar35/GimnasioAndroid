@@ -1,5 +1,8 @@
 package com.example.gym.ui.calendario
 
+import android.graphics.Color
+import android.graphics.Typeface
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -23,10 +27,10 @@ class VerRutina : Fragment() {
 
     private lateinit var titulo: TextView
     private lateinit var descripcion: EditText
-    private lateinit var lista: TextView
+    //private lateinit var lista: TextView
     private lateinit var guardar: Button
     private lateinit var botonNewEjer: Button
-    private var ejercicios: List<Ejercicio> = emptyList()
+    //private var ejercicios: List<Ejercicio> = emptyList()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,7 +44,7 @@ class VerRutina : Fragment() {
         var fecha = arguments?.getString("fecha")
         titulo = view.findViewById(R.id.fechaRut)
         descripcion = view.findViewById(R.id.editDescripcionRut)
-        lista = view.findViewById(R.id.listaRut)
+        //lista = view.findViewById(R.id.listaRut)
         guardar = view.findViewById(R.id.guardaRut)
         botonNewEjer = view.findViewById(R.id.nuevoejerbutton)
 
@@ -64,9 +68,9 @@ class VerRutina : Fragment() {
                             descripcion.setText(rutina.descripcion)
                             rutinaViewModel.descripcion=rutina.descripcion
 
-                            ejercicios = rutina.ejercicios
-                            lista.text = imprimeEjercicios(ejercicios)
-                            rutinaViewModel.ejercicios=ejercicios.toMutableList()
+                            //lista.text = imprimeEjercicios(rutina.ejercicios)
+                            rutinaViewModel.ejercicios=rutina.ejercicios.toMutableList()
+                            mostrarEjercicios(view)
                         } else {
                             Log.d("Firestore", "Documento inválido para Rutina")
                         }
@@ -82,8 +86,8 @@ class VerRutina : Fragment() {
 
             descripcion.setText(rutinaViewModel.descripcion)
 
-            ejercicios = rutinaViewModel.ejercicios
-            lista.text = imprimeEjercicios(rutinaViewModel.ejercicios)
+            //lista.text = imprimeEjercicios(rutinaViewModel.ejercicios)
+            mostrarEjercicios(view)
         }
 
         botonNewEjer.setOnClickListener{
@@ -95,7 +99,7 @@ class VerRutina : Fragment() {
             val nuevaRutina = Rutina(
                 descripcion = descripcion.text.toString(),
                 fecha = fecha ?: rutinaViewModel.fecha,
-                ejercicios = ejercicios
+                ejercicios = rutinaViewModel.ejercicios
             )
 
             rutinaViewModel.descripcion = nuevaRutina.descripcion
@@ -113,7 +117,7 @@ class VerRutina : Fragment() {
         }
     }
 
-    fun imprimeEjercicios(lista:List<Ejercicio>): String{
+    /*fun imprimeEjercicios(lista:List<Ejercicio>): String{
         var aux = ""
         for (e in lista) {
             aux = aux +
@@ -124,7 +128,56 @@ class VerRutina : Fragment() {
         }
 
         return aux // o mostrar ejercicios
+    }*/
+
+    private fun mostrarEjercicios(view: View) {
+        val container = view.findViewById<LinearLayout>(R.id.containerList)
+        container?.removeAllViews()
+
+        rutinaViewModel.ejercicios.forEachIndexed { index, ejercicio ->
+            val fila = LinearLayout(requireContext()).apply {
+                orientation = LinearLayout.HORIZONTAL
+            }
+
+            val texto = TextView(requireContext()).apply {
+                text = "NOMBRE: ${ejercicio.nombre}\n" +
+                        "DESCRIPCION: ${ejercicio.descripcion}\n" +
+                        "REPETICIONES: ${ejercicio.repeticiones}\n" +
+                        "SERIES: ${ejercicio.series}\n\n"
+                textSize = 18f
+                layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
+            }
+
+            val botonEliminar = Button(requireContext()).apply {
+                text = "X"
+                textSize = 14f
+                setTextColor(Color.WHITE)
+                typeface = Typeface.DEFAULT_BOLD
+
+                background = GradientDrawable().apply {
+                    shape = GradientDrawable.RECTANGLE
+                    cornerRadius = 30f
+                    setColor(Color.RED)
+                }
+
+                layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                ).apply {
+                    topMargin = 75
+                }
+                setOnClickListener {
+                    rutinaViewModel.ejercicios.removeAt(index)
+                    mostrarEjercicios(view) // refresca la lista
+                }
+            }
+
+            fila.addView(texto)
+            fila.addView(botonEliminar)
+            container?.addView(fila)
+        }
     }
+
 
 }
 //package com.example.gym.ui.calendario

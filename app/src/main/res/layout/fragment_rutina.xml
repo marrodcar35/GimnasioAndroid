@@ -11,9 +11,10 @@
         android:layout_height="31dp"
         android:text="Dia de la rut"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.048"
+        app:layout_constraintHorizontal_bias="0.026"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.022" />
@@ -22,69 +23,70 @@
         android:id="@+id/descripcionRut"
         android:layout_width="166dp"
         android:layout_height="30dp"
-        android:layout_marginStart="12dp"
-        android:text="Descripcion:"
+        android:layout_marginStart="8dp"
+        android:text="DESCRIPCION:"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.116" />
+        app:layout_constraintVertical_bias="0.114" />
 
     <TextView
         android:id="@+id/ejerciciosRut"
         android:layout_width="166dp"
         android:layout_height="30dp"
-        android:layout_marginStart="12dp"
-        android:text="Ejercicios:"
+        android:layout_marginStart="8dp"
+        android:text="EJERCICIOS:"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.209" />
+        app:layout_constraintVertical_bias="0.208" />
 
     <EditText
         android:id="@+id/editDescripcionRut"
         android:layout_width="196dp"
         android:layout_height="55dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="68dp"
         android:ems="10"
         android:inputType="text"
         android:text="Name"
         app:layout_constraintStart_toEndOf="@+id/descripcionRut"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/listaRut"
-        android:layout_width="204dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="32dp"
-        android:text=""
-        android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@+id/ejerciciosRut"
-        app:layout_constraintTop_toBottomOf="@+id/editDescripcionRut" />
-
     <Button
         android:id="@+id/nuevoejerbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="208dp"
-        android:text="Agregar Ejercicio"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="216dp"
+        android:layout_marginTop="20dp"
+        android:text="AGREGAR EJERCICIO"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listaRut"
-        app:layout_constraintVertical_bias="0.143" />
+        app:layout_constraintTop_toBottomOf="@+id/containerList" />
 
     <Button
         android:id="@+id/guardaRut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="156dp"
-        android:layout_marginTop="144dp"
-        android:text="Guardar"
+        android:layout_marginStart="152dp"
+        android:layout_marginTop="64dp"
+        android:text="GUARDAR"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nuevoejerbutton" />
+
+    <LinearLayout
+        android:id="@+id/containerList"
+        android:layout_width="395dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ejerciciosRut"></LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
