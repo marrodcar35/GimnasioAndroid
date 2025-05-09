@@ -61,6 +61,8 @@ dependencies {
     //implementation("com.kizitonwose.calendar:view:2.6.2")
     //coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.3")
     implementation("com.github.prolificinteractive:material-calendarview:2.0.1")
+
+    implementation("com.google.android.material:material:1.11.0")
     //implementation("com.github.prolificinteractive:material-calendarview:1.4.3")
     /*implementation("com.kizitonwose.calendar:view:2.0.3")
 

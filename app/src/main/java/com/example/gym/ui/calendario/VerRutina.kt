@@ -5,6 +5,7 @@ import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -54,7 +56,7 @@ class VerRutina : Fragment() {
         val rutinaRef = db.collection("rutinas").document(fecha ?: rutinaViewModel.fecha)
 
         if (rutinaViewModel.fecha.isEmpty() && fecha != null) {
-            titulo.text = "Rutina de $fecha"
+            titulo.text = "Rutina del $fecha"
             rutinaViewModel.fecha = fecha
 
             // Leer la rutina desde Firestore
@@ -75,6 +77,7 @@ class VerRutina : Fragment() {
                             Log.d("Firestore", "Documento inválido para Rutina")
                         }
                     } else {
+                        cambiaTamañoScroll(view)
                         Log.d("Firestore", "No hay rutina para esta fecha")
                     }
                 }
@@ -134,6 +137,8 @@ class VerRutina : Fragment() {
         val container = view.findViewById<LinearLayout>(R.id.containerList)
         container?.removeAllViews()
 
+        cambiaTamañoScroll(view)
+
         rutinaViewModel.ejercicios.forEachIndexed { index, ejercicio ->
             val fila = LinearLayout(requireContext()).apply {
                 orientation = LinearLayout.HORIZONTAL
@@ -144,9 +149,16 @@ class VerRutina : Fragment() {
                         "DESCRIPCION: ${ejercicio.descripcion}\n" +
                         "REPETICIONES: ${ejercicio.repeticiones}\n" +
                         "SERIES: ${ejercicio.series}\n\n"
-                textSize = 18f
+                textSize = 14f
+                setTextColor(Color.WHITE)
                 layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
             }
+
+            val sizeInDp = TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                50f, // tamaño cuadrado en dp
+                resources.displayMetrics
+            ).toInt()
 
             val botonEliminar = Button(requireContext()).apply {
                 text = "X"
@@ -154,21 +166,19 @@ class VerRutina : Fragment() {
                 setTextColor(Color.WHITE)
                 typeface = Typeface.DEFAULT_BOLD
 
+                layoutParams = LinearLayout.LayoutParams(sizeInDp, sizeInDp).apply {
+                    topMargin = 75
+                }
+
                 background = GradientDrawable().apply {
                     shape = GradientDrawable.RECTANGLE
                     cornerRadius = 30f
                     setColor(Color.RED)
                 }
 
-                layoutParams = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-                ).apply {
-                    topMargin = 75
-                }
                 setOnClickListener {
                     rutinaViewModel.ejercicios.removeAt(index)
-                    mostrarEjercicios(view) // refresca la lista
+                    mostrarEjercicios(view)
                 }
             }
 
@@ -178,6 +188,43 @@ class VerRutina : Fragment() {
         }
     }
 
+    private fun cambiaTamañoScroll(view: View){
+        val scroll = view.findViewById<NestedScrollView>(R.id.scrollEjercicios)
+        val container = view.findViewById<LinearLayout>(R.id.containerList)
+
+        if(rutinaViewModel.ejercicios.size==0) {
+            val fila = LinearLayout(requireContext()).apply {
+                orientation = LinearLayout.HORIZONTAL
+            }
+
+            val texto = TextView(requireContext()).apply {
+                text = "No hay ejercicios para este dia"
+                textSize = 14f
+                setTextColor(Color.WHITE)
+                layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
+            }
+
+            fila.addView(texto)
+            container?.addView(fila)
+        }
+
+        val alturaDp = when (rutinaViewModel.ejercicios.size) {
+            0 -> 50
+            1 -> 137
+            else -> 275
+        }
+
+        val alturaPx = TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            alturaDp.toFloat(),
+            resources.displayMetrics
+        ).toInt()
+        scroll.post {
+            scroll.layoutParams.height = alturaPx
+            scroll.requestLayout()
+        }
+
+    }
 
 }
 //package com.example.gym.ui.calendario
