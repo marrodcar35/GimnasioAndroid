@@ -20,6 +20,8 @@ public class TimerActivity extends Fragment {
 
     private EditText minutesInput, secondsInput;
     private TextView tvTimer;
+
+    private TextView tvTitle;
     private Button btnStartStopTimer, btnResetTimer, btnSwitchMode;
     private CountDownTimer countDownTimer;
     private boolean isRunning = false;
@@ -28,6 +30,7 @@ public class TimerActivity extends Fragment {
     private long timeMilis = 0;
     private long startTime = 0;
     private long elapsedTime = 0;
+
     private Handler handler = new Handler();
 
     public TimerActivity() {
@@ -45,6 +48,8 @@ public class TimerActivity extends Fragment {
         btnStartStopTimer = view.findViewById(R.id.btn_start_stop_timer);
         btnResetTimer = view.findViewById(R.id.btn_reset_timer);
         btnSwitchMode = view.findViewById(R.id.btn_switch_mode);
+        tvTitle = view.findViewById(R.id.tv_title);
+
 
         btnStartStopTimer.setOnClickListener(v -> {
             if (isRunning) {
@@ -162,12 +167,14 @@ public class TimerActivity extends Fragment {
             secondsInput.setVisibility(View.VISIBLE);
             btnSwitchMode.setText("Cambiar a Cronómetro");
             btnStartStopTimer.setText("Iniciar");
+            tvTitle.setText("Temporizador");
         } else {
             tvTimer.setText("00:00.00");
             minutesInput.setVisibility(View.GONE);
             secondsInput.setVisibility(View.GONE);
             btnSwitchMode.setText("Cambiar a Cuenta Atrás");
             btnStartStopTimer.setText("Iniciar");
+            tvTitle.setText("Cronómetro");
         }
     }
 

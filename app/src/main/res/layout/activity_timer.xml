@@ -12,10 +12,10 @@
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
         android:text="Temporizador"
         android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="20dp"/>
+        android:textStyle="bold" />
 
     <!-- Campos para ingresar minutos y segundos -->
     <LinearLayout
