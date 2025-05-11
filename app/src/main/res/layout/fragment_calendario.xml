@@ -1,56 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/asu"
+    tools:context=".TuActivity">
 
-    <!--CalendarView
-        android:id="@+id/calendarView"
-        android:layout_width="400dp"
-        android:layout_height="391dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
-        app:layout_constraintStart_toStartOf="parent"
+    <!-- CardView que envuelve el calendario -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardCalendario"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="8dp"
+        app:cardUseCompatPadding="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.111" /-->
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <com.prolificinteractive.materialcalendarview.MaterialCalendarView
-        android:id="@+id/calendarView"
-        android:layout_width="407dp"
-        android:layout_height="400dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:mcv_selectionColor="#00F"
-        app:mcv_showOtherDates="all" />
+        <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:mcv_selectionColor="#00F"
+            app:mcv_showOtherDates="all"/>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Texto con la fecha seleccionada -->
+
+    <!-- Botón para ver la rutina -->
 
     <TextView
         android:id="@+id/fechaTexto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="164dp"
-        android:text=""
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/calendarView"
-        app:layout_constraintVertical_bias="0.472" />
-
-    <Button
-        android:id="@+id/rutinabtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="612dp"
-        android:text="VER RUTINA"
+        android:layout_width="344dp"
+        android:layout_height="76dp"
+        android:layout_marginTop="100dp"
+        android:text="Selecciona un día"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
         android:textStyle="bold"
-        android:backgroundTint="@color/pink"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardCalendario" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/rutinabtn"
+        android:layout_width="313dp"
+        android:layout_height="87dp"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/gradient_pink"
+        android:text="VER RUTINA"
+        android:textColor="#FDFAFA"
+        android:textSize="20sp"
+        android:textStyle="bold"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/cardCalendario" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

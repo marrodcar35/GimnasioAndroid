@@ -90,25 +90,28 @@
                 </androidx.core.widget.NestedScrollView>
             </androidx.cardview.widget.CardView>
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/nuevoejerbutton"
-                android:layout_width="wrap_content"
+                android:layout_width="161dp"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:backgroundTint="@color/pink"
                 android:layout_gravity="right"
                 android:layout_marginTop="16dp"
-                android:text="Agregar ejercicio" />
+                android:background="@drawable/gradient_pink"
+                android:text="Agregar ejercicio"
+                android:textColor="#EDE5E5"
+                android:textStyle="bold" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/guardaRut"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Guardar"
-                android:textStyle="bold"
-                android:backgroundTint="@color/pink"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="12dp" />
+                android:layout_marginTop="12dp"
+                android:background="@drawable/gradient_pink"
+                android:text="Guardar"
+                android:textColor="#F8F4F4"
+                android:textColorLink="#FAF6F6"
+                android:textStyle="bold" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
