@@ -177,7 +177,7 @@
                         android:layout_weight="1"
                         android:background="@drawable/gradient_pink"
                         android:text="Editar"
-                        android:textColor="#D1CACA"
+                        android:textColor="#F0ECEC"
                         android:textStyle="bold" />
 
                     <androidx.appcompat.widget.AppCompatButton
@@ -188,6 +188,7 @@
                         android:layout_weight="1"
                         android:background="@drawable/bot_tri"
                         android:text="Guardar"
+                        android:textColor="#FDF7F7"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -196,8 +197,9 @@
                     android:id="@+id/button3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/bot_sec"
                     android:text="Log out"
-                    android:background="@drawable/bot_sec"/>
+                    android:textStyle="bold" />
             </LinearLayout>
         </ScrollView>
     </androidx.cardview.widget.CardView>
