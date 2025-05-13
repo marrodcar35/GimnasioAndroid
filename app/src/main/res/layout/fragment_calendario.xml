@@ -5,8 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/asu"
-    tools:context=".TuActivity">
+    android:background="@color/asu">
 
     <!-- CardView que envuelve el calendario -->
     <androidx.cardview.widget.CardView
@@ -31,10 +30,6 @@
             app:mcv_selectionColor="#00F"
             app:mcv_showOtherDates="all"/>
     </androidx.cardview.widget.CardView>
-
-    <!-- Texto con la fecha seleccionada -->
-
-    <!-- Botón para ver la rutina -->
 
     <TextView
         android:id="@+id/fechaTexto"
